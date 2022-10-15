@@ -7,22 +7,28 @@
     <title>Document</title>
     <link rel = "stylesheet" href="styles.css">
     <script type="text/javascript" src="scripts.js" defer></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fascinate&family=Monoton&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="buttonContainer">
-        <p>Choose color below.</p>
-        <button class = "buttonBW">Black and White</button>
-        <button class = "buttonRainbow">Rainbow Colour</button>
-        <button class = "buttonGradient">Black Gradient</button>
-        <button class= "buttonErase">Reset board</button>
-        <div class= "resolutionBox">
-            <input class="resolutionInput" type="number">
-            <button class="buttonApply">Apply</button>
-        </button>
+        <p>Choose coloring style!</p>
+        <button class = "buttonBW">B/W</button>
+        <button class = "buttonRainbow"><img src=RainbowButton.svg height="80px" width="80px"></button>
+        <button class = "buttonGradient"><img src=GradientButton.svg></button>
+        <button class= "buttonErase"><img src=RefreshButton.svg></button>
         </div>
     </div>
+    <div class = "boardResolutionContainer">
     <div class ="boardContainer">
          <div class="boardSpace"></div>
     </div>
+    <div class= "resolutionBox">
+        <input class="resolutionInput" type="number" value = 2>
+        <button class="buttonApply"><img src=ResolutionCheck.svg></button>
+    </div>
+    </div>
+    
 </body>
 </html>

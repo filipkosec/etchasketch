@@ -15,7 +15,9 @@ applyButton.addEventListener('click', () => {
 })
 
 function drawGrid(resolution, colorChoice) {
+    /*Do not move this line to the event listener, stops working, not sure why. */
     if (resolution < 2) {resolution = 2};
+    /*------------------------------------------------------------------------ */
     boardSpace.innerHTML = ""
     let x = 0
     for (i = 0; i<resolution; i++) {
@@ -25,7 +27,7 @@ function drawGrid(resolution, colorChoice) {
         for (j = 0; j<resolution;j++) {
             let cell = document.createElement('div');
             cell.classList.add('cell');
-            cell.classList.add(`cell${x}`);
+            cell.id =`${x}`;
             x++;
             row.appendChild(cell);
             };
@@ -39,14 +41,20 @@ function addHoverActions(colorChoice,x) {
     for (i = 0; i < cellArray.length; i++) {
         cellArray[i] = cellArray[i][0];
     }
+    let gradientIndex = [];
+    for (i=0; i<cellArray.length;i++) {
+        gradientIndex[i] = 0;
+    }
     cellArray.forEach(element => {
         element.addEventListener('mouseover', () => {
             if (colorChoice === 'rainbow') {
                 let randomColor = "#" + Math.floor(Math.random()*16777215).toString(16)
                 element.style.backgroundColor = randomColor;
             } else if (colorChoice === 'gradient') {
-                let curColor = element.style.backgroundColor;
-                element.style.backgroundColor = gradientAdder(curColor);
+                let cellPosition = element.getAttribute("id");
+                element.style.backgroundColor = gradientColorChange(gradientIndex[cellPosition]);
+                gradientIndex[cellPosition]++
+                console.log(gradientIndex);
             } else {
             element.style.backgroundColor = colorChoice;
             }
@@ -55,20 +63,10 @@ function addHoverActions(colorChoice,x) {
    
 };
 
-function gradientAdder (currentColor) {
-    if (currentColor = "#FFFFFF") {
-        return ("#c0c0c0");
-    } else if (currentColor = "#c0c0c0") {
-        return("#808080");
-    } else if (currentColor = "#808080") {
-        return("#404040");
-    } else if (currentColor = "#404040") {
-        return("#000000")
-    } else {
-        return ("#000000")
-    };
+function gradientColorChange (strengthOfBlack) {
+    let blackRatio = (9-strengthOfBlack)/10*255
+    return (`rgb(${blackRatio},${blackRatio},${blackRatio})`)
 }
-        
 
 
 drawGrid(1, "black");
